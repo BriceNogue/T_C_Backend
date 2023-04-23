@@ -1,0 +1,37 @@
+POST http://127.0.0.1:9000/api/user HTTP/1.1
+Content-Type: application/json
+
+{
+    "user_code": "ILA29GKY5UA",
+    "first_name": "Regina",
+    "last_name": "Page",
+    "address": "320-7827 Eget Road",
+    "service": "A Consulting",
+    "phone": "0800 1111",
+    "picture": "picture",
+    "password": "pwd"
+}
+
+###
+GET http://127.0.0.1:9000/api/users HTTP/1.1
+
+###
+GET http://127.0.0.1:9000/api/users/643a62ca7d75d5b5de6d9c8d HTTP/1.
+
+###
+PUT http://127.0.0.1:9000/api/user/64395976dbf7b005c1c26c71 HTTP/1.1
+Content-Type: application/json
+
+{
+  "user_code": "kelkun",
+  "first_name": "Ogaaaaaaaaa",
+  "last_name": "joyboy",
+  "address": "Logbessou",
+  "service": "General",
+  "phone": "+237655053546",
+  "picture": "Picture",
+  "password": "asdsdsdss"
+}
+
+###
+DELETE http://127.0.0.1:9000/api/user/643a62ca7d75d5b5de6d9c8d HTTP/1.1
