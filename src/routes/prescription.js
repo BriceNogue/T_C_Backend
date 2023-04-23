@@ -17,3 +17,6 @@ router.get("/prescriptions", (req, res) => {
         res.json(data)).catch((error) =>
             res.json({ message: error }));
 });
+
+
+module.exports = router;
