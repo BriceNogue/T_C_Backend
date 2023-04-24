@@ -22,12 +22,12 @@ app.use(cors({
 }));
 app.use(express.json());
 
-app.use('/api', consultationRoutes);
+/*app.use('/api', consultationRoutes);
 app.use('/api', patientRoutes);
 app.use('/api', paymentRoutes);
 app.use('/api', prescriptionRoutes);
-app.use('/api', serviceRoutes);
-app.use('/api', userRoutes);
+app.use('/api', serviceRoutes);*/
+app.use('/api', userRoutes, serviceRoutes);
 
 // routes
 app.get('/', (req, res) => {
