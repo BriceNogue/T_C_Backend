@@ -17,7 +17,8 @@ const cors = require('cors');
 
 // middleware
 app.use(cors({
-    origin: '*', credentials: true,
+    credentials: true,
+    origin: ['http://localhost:4200'],
     methods: 'GET,PUT,POST,DELETE,OPTIONS', allowedHeaders: 'Content-Type,Authorization'
 }));
 app.use(express.json());
