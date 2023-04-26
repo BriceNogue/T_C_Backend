@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 // routes definition
@@ -16,6 +17,7 @@ const port = process.env.PORT || 9000;
 const cors = require('cors');
 
 // middleware
+app.use(cookieParser());
 app.use(cors({
     credentials: true,
     origin: ['http://localhost:4200'],

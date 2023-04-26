@@ -48,7 +48,43 @@ router.get("/users/:id", (req, res) => {
         res.json(data)).catch((error) => res.json({ message: error }));
 });
 
-//get login route
+// update user
+router.put("/user/:id", (req, res) => {
+    const { id } = req.params;
+    const {
+        user_code,
+        first_name,
+        last_name,
+        address,
+        service,
+        phone,
+        picture,
+        password
+    } = req.body;
+    userModel.updateOne({ _id: id }, {
+        $set: {
+            user_code,
+            first_name,
+            last_name,
+            address,
+            service,
+            phone,
+            picture,
+            password
+        }
+    }).then((data) => res.json(data)).catch((error) => res.json({ message: error }));
+});
+
+// delete user 
+router.delete("/user/:id", (req, res) => {
+    const { id } = req.params;
+    userModel.deleteOne({ _id: id }).then((data) =>
+        res.json(data)).catch((error) =>
+            res.json({ message: error }));
+});
+
+
+// login route
 /*router.post("/login", function (req, res) {
     try {
         userModel.findOne({ user_code: req.body.user_code }).select("user_code and password").exec(
@@ -89,13 +125,15 @@ router.post("/login", async (req, res) => {
             })
         }
 
-        const token  = jwt.sign({_id: user._id}, "secret");
+        const token = jwt.sign({ _id: user._id }, "secret");
 
         res.cookie('jwt', token, {
             httpOnly: true,
+            sameSite: "strict",
+            secure: true,
             maxAge: 24 * 60 * 60 * 1000 // 1 day
         })
-        
+
         res.send({
             message: "success"
         });
@@ -103,41 +141,38 @@ router.post("/login", async (req, res) => {
     } catch (err) {
         console.log('error', err);
     }
-})
-
-// update user
-router.put("/user/:id", (req, res) => {
-    const { id } = req.params;
-    const {
-        user_code,
-        first_name,
-        last_name,
-        address,
-        service,
-        phone,
-        picture,
-        password
-    } = req.body;
-    userModel.updateOne({ _id: id }, {
-        $set: {
-            user_code,
-            first_name,
-            last_name,
-            address,
-            service,
-            phone,
-            picture,
-            password
-        }
-    }).then((data) => res.json(data)).catch((error) => res.json({ message: error }));
 });
 
-// delete user 
-router.delete("/user/:id", (req, res) => {
-    const { id } = req.params;
-    userModel.deleteOne({ _id: id }).then((data) =>
-        res.json(data)).catch((error) =>
-            res.json({ message: error }));
+router.get("/user", async (req, res) => {
+    try {
+        const cookie = req.cookies['jwt'];
+
+        const claims = jwt.verify(cookie, 'secret');
+
+        if (!claims) {
+            return res.status(401).send({
+                message: 'unauthorized'
+            });
+        }
+
+        const user = await userModel.findOne({ _id: claims._id });
+        const { password, ...data } = await user.toJSON();
+
+        res.send(data);
+
+    } catch (err) {
+        return res.status(401).send({
+            message: 'unauthenticated'
+        })
+    }
+})
+
+router.post('/logout', (req, res) => {
+    res.cookie('jwt', '', { maxAge: 0 });
+
+    res.send({
+        message: 'success'
+    });
 });
 
 module.exports = router;
