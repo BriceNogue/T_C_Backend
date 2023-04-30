@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://127.0.0.1:9000/api/consultations HTTP/1.1
+GET http://127.0.0.1:9000/api/patient_cards/644e98fe5e30334e3892db2d HTTP/1.1
 
 ###
 GET http://127.0.0.1:9000/api/consultations/644c451f7c80fc0a41a9f7bf HTTP/1.1
@@ -60,26 +60,33 @@ DELETE http://127.0.0.1:9000/api/service/644e2be0f5ab22401c44033d HTTP/1.1
 
 // service api
 ###
-POST http://127.0.0.1:9000/api/patient HTTP/1.1
+POST http://127.0.0.1:9000/api/patient_card HTTP/1.1
 Content-Type: application/json
 
 {
-  "patient_code": "P1CODE",
-  "first_name": "P1FName",
-  "last_name": "P1LName",
-  "address": "logbessou",
-  "inscription_date": "2016-12-13T06:55:24.698Z",
-  "birthday": "2016-12-13T06:55:24.698Z",
-  "age": "0",
-  "gender": "M",
-  "assurance": "true",
-  "phone": "65544444",
-  "picture": "p1",
-  "marital_status": "MS1",
-  "emergency_number": "false",
-  "occupation": "OCP1",
-  "password": "pwd1" 
+  "user_code": "req.body.user_code",
+  "user_name": "req.body.user_name",
+  "consultation_code": "req.body.consultation_code",
+  "consultation_details": "req.body.consultation_details",
+  "examinations": [
+    {
+      "libelle":"liiiiibbbbeeeleeee",
+      "result":"resullllllttt"
+    }
+  ],
+  "patient_code": "req.body.patient_code",
+  "patient_name": "req.body.patient_name"
 }
 
 ###
 GET http://127.0.0.1:9000/api/prescriptions HTTP/1.1
+
+###
+
+PUT http://127.0.0.1:9000/api/card_examination/644e98fe5e30334e3892db2d HTTP/1.1
+Content-Type: application/json
+
+{
+  "libelle":"liiiiibbbleeee4444",
+  "result":"resullllllttt4444"
+}
