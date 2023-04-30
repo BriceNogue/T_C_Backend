@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 const appointmentModel = mongoose.Schema({
     appointment_code:{
         type: String,
-        require: true
+        require: true,
+        unique: true,
+        dropDups: true
     },
     appointment_date:{
         type: Date,
@@ -17,18 +19,29 @@ const appointmentModel = mongoose.Schema({
         type: String,
         require: true
     },
-    patient_id:{
+    patient_code:{
         type: String,
         require: true
     },
-    service_id:{
+    patient_name: {
         type: String,
         require: true
     },
-    user_id:{
+    patient_phone: {
+        type: String
+    },
+    service_libelle: {
+        type: String,
+        require: true
+    },
+    user_code: {
+        type: String,
+        require: true
+    },
+    user_name: {
         type: String,
         require: true
     }
-});
+}, {strict: true});
 
 module.exports = mongoose.model('Appointments', appointmentModel);

@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt-nodejs");
 
 const patientModel = mongoose.Schema({
     patient_code:{
         type: String,
-        require: true
+        require: true,
+        unique: true,
+        dropDups: true
     },
     first_name:{
         type: String,
@@ -25,10 +28,6 @@ const patientModel = mongoose.Schema({
         type: Date,
         require: true
     },
-    age:{
-        type: String,
-        require: true
-    },
     gender:{
         type: String,
         require: true
@@ -39,7 +38,7 @@ const patientModel = mongoose.Schema({
     },
     phone:{
         type: String,
-        require: true
+        require: true,
     },
     picture:{
         type: String,
@@ -61,6 +60,15 @@ const patientModel = mongoose.Schema({
         type: String,
         require: false
     }
-});
+}, { strict: true });
+
+patientModel.pre('save', function(next) {
+    var patient = this;
+    bcrypt.hash(patient.password, null, null, function(err, hash) {
+        if(err) return next(err);
+        patient.password = hash;
+        next();
+    })
+})
 
 module.exports = mongoose.model('Patients', patientModel);

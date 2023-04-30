@@ -1,25 +1,26 @@
 
 // user api
 
-POST http://127.0.0.1:9000/api/user HTTP/1.1
+POST http://127.0.0.1:9000/api/consultation HTTP/1.1
 Content-Type: application/json
 
 {
-    "user_code": "TAKECARE237",
-    "first_name": "Take",
-    "last_name": "Care",
-    "address": "320-7827 Eget Road",
-    "service": "A Consulting",
-    "phone": "0800 1111",
-    "picture": "picture",
-    "password": "TakeCare"
+  "consultation_code":"dssdfsf",
+  "user_code":"dsfsd",
+  "user_name":"dfsd",
+  "consultation_date":"2016-12-13T06:55:24.698Z",
+  "service_libelle":"sadsdas",
+  "patient_card_code":"asdas",
+  "patient_code":"sada",
+  "patient_name":"asdasd"
+    
 }
 
 ###
-GET http://127.0.0.1:9000/api/users HTTP/1.1
+GET http://127.0.0.1:9000/api/consultations HTTP/1.1
 
 ###
-GET http://127.0.0.1:9000/api/users/64395cf9aa181e1b05fed486 HTTP/1.1
+GET http://127.0.0.1:9000/api/consultations/644c451f7c80fc0a41a9f7bf HTTP/1.1
 
 ###
 POST http://127.0.0.1:9000/api/login HTTP/1.1
@@ -31,35 +32,54 @@ Content-Type: application/json
 }
 
 ###
-PUT http://127.0.0.1:9000/api/user/64395976dbf7b005c1c26c71 HTTP/1.1
+PUT http://127.0.0.1:9000/api/patient/644b559089967196da3f923c HTTP/1.1
 Content-Type: application/json
 
 {
-  "user_code": "kelkun",
-  "first_name": "Ogaaaaaaaaa",
-  "last_name": "joyboy",
-  "address": "Logbessou",
-  "service": "General",
-  "phone": "+237655053546",
-  "picture": "Picture",
-  "password": "asdsdsdss"
+  "patient_code": "P1CODE",
+  "first_name": "P1FName",
+  "last_name": "P1LName",
+  "address": "logbessou",
+  "inscription_date": "2016-12-13T06:55:24.698Z",
+  "birthday": "2016-12-13T06:55:24.698Z",
+  "age": "0",
+  "gender": "M",
+  "assurance": "true",
+  "phone": "655",
+  "picture": "p1",
+  "marital_status": "MS1",
+  "emergency_number": "false",
+  "occupation": "OCP1",
+  "password": "pwd1" 
 }
 
 ###
-DELETE http://127.0.0.1:9000/api/user/643a62ca7d75d5b5de6d9c8d HTTP/1.1
+DELETE http://127.0.0.1:9000/api/service/644e2be0f5ab22401c44033d HTTP/1.1
 
 
 
 // service api
 ###
-POST http://127.0.0.1:9000/api/service HTTP/1.1
-
+POST http://127.0.0.1:9000/api/patient HTTP/1.1
 Content-Type: application/json
+
 {
-  "service_code":"SRVC1",
-  "libelle":"Administration",
-  "description":"Pour les administrateurs"
+  "patient_code": "P1CODE",
+  "first_name": "P1FName",
+  "last_name": "P1LName",
+  "address": "logbessou",
+  "inscription_date": "2016-12-13T06:55:24.698Z",
+  "birthday": "2016-12-13T06:55:24.698Z",
+  "age": "0",
+  "gender": "M",
+  "assurance": "true",
+  "phone": "65544444",
+  "picture": "p1",
+  "marital_status": "MS1",
+  "emergency_number": "false",
+  "occupation": "OCP1",
+  "password": "pwd1" 
 }
 
 ###
-GET http://127.0.0.1:9000/api/services HTTP/1.1
+GET http://127.0.0.1:9000/api/prescriptions HTTP/1.1

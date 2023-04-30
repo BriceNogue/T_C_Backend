@@ -45,7 +45,8 @@ router.get("/users", (req, res) => {
 router.get("/users/:id", (req, res) => {
     const { id } = req.params;
     userModel.findById(id).then((data) =>
-        res.json(data)).catch((error) => res.json({ message: error }));
+        res.json(data)).catch((error) =>
+            res.json({ message: error }));
 });
 
 // update user
@@ -129,13 +130,13 @@ router.post("/login", async (req, res) => {
 
         res.cookie('jwt', token, {
             httpOnly: true,
-            sameSite: "strict",
+            sameSite: "none",
             secure: true,
             maxAge: 24 * 60 * 60 * 1000 // 1 day
         })
 
         res.send({
-            message: "success"
+            message: "Connected",
         });
 
     } catch (err) {
@@ -168,10 +169,15 @@ router.get("/user", async (req, res) => {
 })
 
 router.post('/logout', (req, res) => {
-    res.cookie('jwt', '', { maxAge: 0 });
+    res.cookie('jwt', '', {
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+        maxAge: 0
+    });
 
     res.send({
-        message: 'success'
+        message: 'Desconnected',
     });
 });
 

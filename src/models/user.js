@@ -5,7 +5,9 @@ const bcrypt = require('bcrypt-nodejs');
 const userModel = new Schema({
     user_code:{
         type: String,
-        require: true
+        require: true,
+        unique: true,
+        dropDups: true
     },
     first_name:{
         type: String,
@@ -36,7 +38,7 @@ const userModel = new Schema({
         require: true
     }
 
-});
+}, { strict: true });
 
 userModel.pre('save', function(next) {
     var user = this;

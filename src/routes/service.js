@@ -4,8 +4,20 @@ const serviceModel = require("../models/service");
 const router = express.Router();
 
 // create service
-router.post("/service", (req, res) => {
+/*router.post("/service", (req, res) => {
     const service = serviceModel(req.body);
+    service.save().then((data) =>
+        res.json(data)).catch((error) =>
+            res.json({ message: error }));
+});*/
+
+router.post("/service", (req, res) => {
+    const service = new serviceModel(
+        {
+            service_code: req.body.libelle+237,
+            libelle: req.body.libelle,
+            description: req.body.description
+        });
     service.save().then((data) =>
         res.json(data)).catch((error) =>
             res.json({ message: error }));

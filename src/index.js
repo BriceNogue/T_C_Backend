@@ -30,7 +30,15 @@ app.use('/api', patientRoutes);
 app.use('/api', paymentRoutes);
 app.use('/api', prescriptionRoutes);
 app.use('/api', serviceRoutes);*/
-app.use('/api', userRoutes, serviceRoutes);
+app.use('/api', 
+    userRoutes, 
+    serviceRoutes,
+    prescriptionRoutes,
+    paymentRoutes,
+    patientRoutes,
+    consultationRoutes,
+    appointmentRoutes
+);
 
 // routes
 app.get('/', (req, res) => {
