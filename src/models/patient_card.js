@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
-//import Examination from ("../class/examination")
+const Examination = require("../objects/examination");
 
-const patientCardModel = mongoose.Schema(
+const Schema = mongoose.Schema;
+
+const patientCardModel = new Schema(
     {
         patient_card_code: {
             type: String,
@@ -27,16 +29,28 @@ const patientCardModel = mongoose.Schema(
         consultation_details: {
             type: String
         },
-        examinations: {
+        /*examinations: {
             type: [
                 {
                     libelle: String,
                     result: String,
                 }
             ]
+        },*/
+        examinations: {
+            type: [Examination]
+        },
+        patient_code: {
+            type: String,
+            requir: true
+        },
+        patient_name: {
+            type: String,
+            require: true
         }
 
-    }
-)
+    }, { strict: true }
+);
 
-module.exports = patientCardModel;
+
+module.exports = mongoose.model("Patient_cards", patientCardModel);
