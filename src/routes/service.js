@@ -14,9 +14,10 @@ const router = express.Router();
 router.post("/service", (req, res) => {
     const service = new serviceModel(
         {
-            service_code: req.body.libelle+237,
+            service_code: req.body.libelle + 237,
             libelle: req.body.libelle,
-            description: req.body.description
+            description: req.body.description,
+            hours: req.body.hours
         });
     service.save().then((data) =>
         res.json(data)).catch((error) =>
@@ -61,5 +62,25 @@ router.delete("/service/:id", (req, res) => {
         res.json(data)).catch((error) =>
             res.json({ message: error }));
 });
+
+// create hours
+router.post("/service/:id", (req, res) => {
+    const { id } = req.params;
+    const {
+        day,
+        startTime,
+        endTime
+    } = req.body;
+    serviceModel.updateOne({ _id: id }, {
+        $push: {
+            hours: {
+                day,
+                startTime,
+                endTime
+            }
+        }
+    }).then((data) => res.json(data)).catch((error) => res.json({ message: error }));
+
+})
 
 module.exports = router;

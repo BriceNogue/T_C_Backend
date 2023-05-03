@@ -12,12 +12,15 @@ router.post("/appointment", (req, res) => {
             appointment_code: req.body.service_libelle+appointmentDate+req.body.date_of_appointment,
             date_of_appointment: req.body.date_of_appointment,
             appointment_hour: req.body.appointment_hour,
-            patient_code: req.body.patient_code,
-            patient_name: req.body.patient_name,
-            patient_phone: req.body.patient_phone,
-            service_libelle: req.body.service_libelle,
-            user_code: req.body.user_code,
-            user_name: req.body.user_name
+            //patient_code: req.body.patient_code,
+            //patient_name: req.body.patient_name,
+            //patient_phone: req.body.patient_phone,
+            patient_id: req.body.patient_id,
+            service_id: req.body.service_id,
+            //service_libelle: req.body.service_libelle,
+            //user_code: req.body.user_code,
+            //user_name: req.body.user_name
+            user_id: req.body.user_id
         }
     );
 
@@ -49,23 +52,29 @@ router.put("/appointments/:id", (req, res) => {
         appointment_date,
         date_of_appointment,
         appointment_hour,
-        patient_code,
-        patient_name,
-        patient_phone,
-        service_libelle,
-        user_code,
-        user_name
+        //patient_code,
+        //patient_name,
+        //patient_phone,
+        patient_id,
+        service_id,
+        //service_libelle,
+        //user_code,
+        //user_name,
+        user_id
     } = req.body;
     appointmentModel.updateOne({ _id: id }, {
         $set: {
             date_of_appointment,
             appointment_hour,
-            patient_code,
-            patient_name,
-            patient_phone,
-            service_libelle,
-            user_code,
-            user_name
+            //patient_code,
+            //patient_name,
+            //patient_phone,
+            patient_id,
+            service_id,
+            //service_libelle,
+            //user_code,
+            //user_name,
+            user_id
         }
     }).then((data) => res.json(data)).catch((error) => res.json({ message: error }));
 });

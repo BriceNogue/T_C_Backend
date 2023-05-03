@@ -7,7 +7,20 @@ const router = express.Router();
 
 // create user
 router.post("/user", (req, res) => {
-    const user = userModel(req.body);
+    const userCode = "TCUC" + req.body.phone + req.body.first_name
+    const pwd = "0000"
+    const user = userModel(
+        {
+            user_code: userCode,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            address: req.body.address,
+            service_id: req.body.service_id,
+            phone: req.body.phone,
+            picture: req.body.picture,
+            password: pwd
+        }
+    );
     user.save().then((data) =>
         res.json(data)).catch((error) =>
             res.json({ message: error }));
@@ -57,7 +70,7 @@ router.put("/user/:id", (req, res) => {
         first_name,
         last_name,
         address,
-        service,
+        service_id,
         phone,
         picture,
         password
@@ -68,7 +81,7 @@ router.put("/user/:id", (req, res) => {
             first_name,
             last_name,
             address,
-            service,
+            service_id,
             phone,
             picture,
             password
@@ -107,6 +120,22 @@ router.delete("/user/:id", (req, res) => {
         console.log(err);
     }
 });*/
+
+router.get("/userSearch/:service", function (req, res) {
+    const { service_id } = req.params;
+    const options = {
+        projection: {
+            _id: 0,
+            first_name: 1,
+            service: 1
+        }
+    }
+    console.log(service_id);
+    userModel.findOne({ service_id: service_id }, options).then((res) =>
+        res.json(res)).catch((error) =>
+            res.json({ message: error }));
+
+})
 
 router.post("/login", async (req, res) => {
 

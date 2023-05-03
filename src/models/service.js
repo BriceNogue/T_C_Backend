@@ -14,6 +14,13 @@ const serviceModel = mongoose.Schema({
     description: {
         type: String,
         require: true,
+    },
+    hours: {
+        type: [{
+            day: String,
+            startTime: String,
+            endTime: String
+        }]
     }
 },{strict: true});
 

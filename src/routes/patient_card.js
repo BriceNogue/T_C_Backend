@@ -81,27 +81,29 @@ router.delete("/patient_card/:id", (req, res) => {
 /********************************************* Examinations ******************************************/
 
 // create examination
-router.put("/card_examination/:id", (req, res) => {
+router.post("/card_examination/:id", (req, res) => {
     const { id } = req.params;
-    /*const exam = req.body;
-    patientCardModel.findById({_id: id}).then((card) => {
-        res.json(card);
-        console.log(exam);
-        card.examinations.push(exam);
-        console.log(card.examinations)
-    }).catch((error) => res.json({message: error}));*/
-
+    const examination_code = "EXC"+req.body.libelle+Date.now();
     const {
         libelle,
+        P_user_code,
+        P_user_name,
+        E_user_code,
+        E_user_name,
         result
     } = req.body;
     patientCardModel.updateOne({ _id: id }, {
-       $push: {
-        examinations: {
-            libelle,
-            result
+        $push: {
+            examinations: {
+                examination_code,
+                libelle,
+                P_user_code,
+                P_user_name,
+                E_user_code,
+                E_user_name,
+                result
+            }
         }
-       }
     }).then((data) => res.json(data)).catch((error) => res.json({ message: error }));
 
 })

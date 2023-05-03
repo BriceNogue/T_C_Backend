@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 // routes definition
+const hoursRoutes = require("./routes/hours");
 const patientCardRoutes = require("./routes/patient_card");
 const appointmentRoutes = require("./routes/appointment");
 const consultationRoutes = require("./routes/consultation");
@@ -39,7 +40,8 @@ app.use('/api',
     patientRoutes,
     consultationRoutes,
     appointmentRoutes,
-    patientCardRoutes
+    patientCardRoutes,
+    hoursRoutes
 );
 
 // routes

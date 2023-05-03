@@ -19,29 +19,20 @@ const appointmentModel = mongoose.Schema({
         type: String,
         require: true
     },
-    patient_code:{
+    patient_id:{
         type: String,
         require: true
     },
-    patient_name: {
-        type: String,
-        require: true
+    service_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Service'
     },
-    patient_phone: {
-        type: String
-    },
-    service_libelle: {
-        type: String,
-        require: true
-    },
-    user_code: {
-        type: String,
-        require: true
-    },
-    user_name: {
-        type: String,
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users',
         require: true
     }
+    
 }, {strict: true});
 
 module.exports = mongoose.model('Appointments', appointmentModel);
