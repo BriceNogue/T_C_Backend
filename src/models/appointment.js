@@ -25,7 +25,8 @@ const appointmentModel = mongoose.Schema({
     },
     service_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Service'
+        ref: 'Service',
+        require: true
     },
     user_id: {
         type: mongoose.Schema.Types.ObjectId,

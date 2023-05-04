@@ -9,14 +9,12 @@ router.post("/consultation", (req, res) => {
     const consultationDate = Date.now();
     const consultation = consultationModel(
         {
-            consultation_code: consultationDate+req.body.service_libelle,
-            user_code: req.user_code,
-            user_name: req.user_name,
+            consultation_code: consultationDate + req.body.patient_id,
+            appointment_id: req.body.appointment_id,
+            user_id: req.user_id,
             consultation_date: consultationDate,
-            service_libelle: req.body.service_libelle,
-            patient_card_code: req.body.patient_card_code,
-            patient_code: req.body.patient_code,
-            patient_name: req.body.patient_name
+            service_id: req.body.service_id,
+            patient_id: req.body.patient_id
         }
     );
     consultation.save().then((data) =>
@@ -44,24 +42,20 @@ router.put("/consultation/:id", (req, res) => {
     const { id } = req.params;
     const {
         consultation_code,
-        user_code,
-        user_name,
+        appointment_id,
+        user_id,
         consultation_date,
-        service_libelle,
-        patient_card_code,
-        patient_code,
-        patient_name
+        service_id,
+        patient_id
     } = req.body;
     consultationModel.updateOne({ _id: id }, {
         $set: {
             consultation_code,
-            user_code,
-            user_name,
+            appointment_id,
+            user_id,
             consultation_date,
-            service_libelle,
-            patient_card_code,
-            patient_code,
-            patient_name
+            service_id,
+            patient_id
         }
     }).then((data) => res.json(data)).catch((error) => {
         res.json({ message: error });

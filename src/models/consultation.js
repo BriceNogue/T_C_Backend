@@ -7,36 +7,27 @@ const consultationModel = mongoose.Schema({
         unique: true,
         dropDups: true
     },
-    user_code: {
-        type: String,
-        require: true,
+    appointment_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Appointments'
     },
-    user_name: {
-        type: String,
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users',
         require: true
     },
     consultation_date: {
         type: Date,
         require: true
     },
-    service_libelle: {
-        type: String,
+    service_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Services',
         require: true
     },
-    consultation_details: {
-        type: String,
-        require: true
-    },
-    patient_card_code: {
-        type: String,
-        require: true
-    },
-    patient_code: {
-        type: String,
-        require: false
-    },
-    patient_name: {
-        type: String,
+    patient_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Patients',
         require: true
     }
 
