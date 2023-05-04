@@ -9,7 +9,7 @@ router.post("/appointment", (req, res) => {
     const appointment = appointmentModel(
         {
             appointment_date: appointmentDate,
-            appointment_code: req.body.service_libelle+appointmentDate+req.body.date_of_appointment,
+            appointment_code: req.body.service_id+appointmentDate+req.body.date_of_appointment,
             date_of_appointment: req.body.date_of_appointment,
             appointment_hour: req.body.appointment_hour,
             //patient_code: req.body.patient_code,

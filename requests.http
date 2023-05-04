@@ -83,12 +83,13 @@ GET http://127.0.0.1:9000/api/appointments/644e3af1b90d634b68ee8c0f HTTP/1.1
 
 ###
 
-POST http://127.0.0.1:9000/api/hour HTTP/1.1
+POST http://127.0.0.1:9000/api/appointment HTTP/1.1
 Content-Type: application/json
 
 {
+  "date_of_appointment": "2016-12-13T06:55:24.698Z",
+  "appointment_hour": "06:55:24",  
   "service_id": "6446dea87abf0e2de7e6653a",
-  "date": "rgdfgd",
-  "startTime": "drgrdfg",
-  "endTime": "dfggdg"
+  "user_id": "644789359cd2334e4633e467",
+  "patient_id": "644b5b31fc0acc555d9de211"
 }

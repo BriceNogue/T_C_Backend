@@ -9,11 +9,12 @@ const consultationModel = mongoose.Schema({
     },
     appointment_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Appointments'
+        ref: 'appointments',
+        require: true
     },
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users',
+        ref: 'users',
         require: true
     },
     consultation_date: {
@@ -22,12 +23,12 @@ const consultationModel = mongoose.Schema({
     },
     service_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Services',
+        ref: 'services',
         require: true
     },
     patient_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Patients',
+        ref: 'patients',
         require: true
     }
 
