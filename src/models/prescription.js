@@ -15,24 +15,19 @@ const prescriptionModel = mongoose.Schema({
         type: String,
         require: true
     },
-    user_code: {
-        type: String,
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users',
         require: true
     },
-    user_name: {
-        type: String,
+    patient_card_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Patient_cards',
         require: true
     },
-    patient_card_code: {
-        type: String,
-        require: true
-    },
-    patient_name: {
-        type: String,
-        require: true
-    },
-    patient_phone: {
-        type: String,
+    patient_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Patients',
         require: true
     }
 }, {strict: true});

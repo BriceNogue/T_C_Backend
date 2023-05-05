@@ -15,16 +15,14 @@ const patientCardModel = new Schema(
             type: Date,
             require: true
         },
-        user_code: {
-            type: String,
+        user_id: {
+            type: Schema.Types.ObjectId,
+            ref:'Users',
             require: true
         },
-        user_name: {
-            type: String,
-            require: true
-        },
-        consultation_code: {
-            type: String,
+        consultation_id: {
+            type: Schema.Types.ObjectId,
+            ref: 'Consultations'
         },
         consultation_details: {
             type: String
@@ -40,13 +38,10 @@ const patientCardModel = new Schema(
         examinations: {
             type: [Examination]
         },
-        patient_code: {
-            type: String,
+        patient_id: {
+            type: Schema.Types.ObjectId,
+            ref: 'Patients',
             requir: true
-        },
-        patient_name: {
-            type: String,
-            require: true
         }
 
     }, { strict: true }

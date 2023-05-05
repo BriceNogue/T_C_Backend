@@ -91,5 +91,6 @@ Content-Type: application/json
   "appointment_hour": "06:55:24",  
   "service_id": "6446dea87abf0e2de7e6653a",
   "user_id": "644789359cd2334e4633e467",
+  "appointment_hour": "12:30",
   "patient_id": "644b5b31fc0acc555d9de211"
 }

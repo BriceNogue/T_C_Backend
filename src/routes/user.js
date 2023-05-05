@@ -7,7 +7,7 @@ const router = express.Router();
 
 // create user
 router.post("/user", (req, res) => {
-    const userCode = "TCUC" + req.body.phone + req.body.first_name
+    const userCode = "TCUC" + req.body.phone
     const pwd = "0000"
     const user = userModel(
         {
@@ -156,6 +156,7 @@ router.post("/login", async (req, res) => {
         }
 
         const token = jwt.sign({ _id: user._id }, "secret");
+        const { password, ...data } = await user.toJSON();
 
         res.cookie('jwt', token, {
             httpOnly: true,
@@ -166,6 +167,8 @@ router.post("/login", async (req, res) => {
 
         res.send({
             message: "Connected",
+            data,
+            token
         });
 
     } catch (err) {
@@ -173,7 +176,7 @@ router.post("/login", async (req, res) => {
     }
 });
 
-router.get("/user", async (req, res) => {
+/*router.get("/user", async (req, res) => {
     try {
         const cookie = req.cookies['jwt'];
 
@@ -195,7 +198,7 @@ router.get("/user", async (req, res) => {
             message: 'unauthenticated'
         })
     }
-})
+})*/
 
 router.post('/logout', (req, res) => {
     res.cookie('jwt', '', {
