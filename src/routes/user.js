@@ -16,6 +16,7 @@ router.post("/user", (req, res) => {
             last_name: req.body.last_name,
             address: req.body.address,
             service_id: req.body.service_id,
+            role: req.body.role,
             phone: req.body.phone,
             picture: req.body.picture,
             password: pwd
@@ -25,6 +26,7 @@ router.post("/user", (req, res) => {
         res.json(data)).catch((error) =>
             res.json({ message: error }));
 });
+
 /*router.post("/user", async (req, res) => {
     try {
         const salt = await bcrypt.genSalt(10);
@@ -71,6 +73,7 @@ router.put("/user/:id", (req, res) => {
         last_name,
         address,
         service_id,
+        role,
         phone,
         picture,
         password
@@ -82,6 +85,7 @@ router.put("/user/:id", (req, res) => {
             last_name,
             address,
             service_id,
+            role,
             phone,
             picture,
             password
@@ -99,28 +103,6 @@ router.delete("/user/:id", (req, res) => {
 
 
 // login route
-/*router.post("/login", function (req, res) {
-    try {
-        userModel.findOne({ user_code: req.body.user_code }).select("user_code and password").exec(
-            function (err, user) {
-                if (err) throw err;
-                if (!user) {
-                    res.json({ success: false, message: "Could not authenticate user" });
-                } else if (user) {
-                    if (req.body.password) var validPassword = user.comparePassword(req.body.password);
-                    if (!validPassword) {
-                        res.json({ success: false, message: "Could not authenticate password" });
-                    } else {
-                        res.json({ succes: true, message: "User authenticated!" });
-                    }
-                }
-            }
-        );
-    } catch (err) {
-        console.log(err);
-    }
-});*/
-
 router.get("/userSearch/:service", function (req, res) {
     const { service_id } = req.params;
     const options = {
@@ -155,7 +137,7 @@ router.post("/login", async (req, res) => {
             })
         }
 
-        const token = jwt.sign({ _id: user._id }, "secret");
+        const token = jwt.sign({ _id: user._id, role: user.role }, "secret");
         const { password, ...data } = await user.toJSON();
 
         res.cookie('jwt', token, {
@@ -167,7 +149,7 @@ router.post("/login", async (req, res) => {
 
         res.send({
             message: "Connected",
-            data,
+           // data,
             token
         });
 
@@ -175,6 +157,31 @@ router.post("/login", async (req, res) => {
         console.log('error', err);
     }
 });
+
+router.get("/user", async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        const token = authHeader.split(' ')[1];
+
+        const claims = jwt.verify(token, 'secret');
+
+        if (!claims) {
+            return res.status(401).send({
+                message: 'unauthorized'
+            });
+        }
+
+        const user = await userModel.findOne({ _id: claims._id });
+        const { password, ...data } = await user.toJSON();
+
+        res.send(data);
+
+    } catch (err) {
+        return res.status(401).send({
+            message: 'unauthenticated'
+        })
+    }
+})
 
 /*router.get("/user", async (req, res) => {
     try {

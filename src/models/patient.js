@@ -28,9 +28,15 @@ const patientModel = mongoose.Schema({
         type: Date,
         require: true
     },
+    age: {
+        type: String,
+    },
     gender:{
         type: String,
         require: true
+    },
+    blood_group: {
+        type: String
     },
     assurance:{
         type: Boolean,

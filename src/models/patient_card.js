@@ -7,9 +7,7 @@ const patientCardModel = new Schema(
     {
         patient_card_code: {
             type: String,
-            require: true,
-            unique: true,
-            dropDups: true
+            require: true
         },
         patient_card_date: {
             type: Date,
@@ -20,9 +18,24 @@ const patientCardModel = new Schema(
             ref:'Users',
             require: true
         },
-        consultation_id: {
+        /*consultation_id: {
             type: Schema.Types.ObjectId,
             ref: 'Consultations'
+        },*/
+        temperature: {
+            type: String,
+            require: true
+        },
+        blood_pressure: {
+            type: String,
+            require: true
+        },
+        weight: {
+            type: String,
+            require: true
+        },
+        size: {
+            type: String,
         },
         consultation_details: {
             type: String

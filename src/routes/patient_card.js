@@ -7,13 +7,20 @@ const router = express.Router();
 
 // create partient card
 router.post("/patient_card", (req, res) => {
+    
+    const nbrCard = patientCardModel.count();
+
     const patientCodeDate = Date.now()
     const patientCard = patientCardModel(
         {
-            patient_card_code: "PCC" + req.body.user_name + patientCodeDate + req.body.patient_name,
+            patient_card_code: "TKPCC"+req.body.patient_id,
             patient_card_date: patientCodeDate,
             user_id: req.body.user_id,
-            consultation_id: req.body.consultation_id,
+            //consultation_id: req.body.consultation_id,
+            temperature: req.body.temperature,
+            blood_pressure: req.body.blood_pressure,
+            weight: req.body.weight,
+            size: req.body.size,
             consultation_details: req.body.consultation_details,
             examinations: req.body.examinations,
             patient_id: req.body.patient_id
@@ -46,7 +53,11 @@ router.put("/patient_cards/:id", (req, res) => {
         patient_card_code,
         patient_card_date,
         user_id,
-        consultation_id,
+        //consultation_id,
+        temperature,
+        blood_pressure,
+        weight,
+        size,
         consultation_details,
         examinations,
         patient_id
@@ -56,7 +67,11 @@ router.put("/patient_cards/:id", (req, res) => {
             patient_card_code,
             patient_card_date,
             user_id,
-            consultation_id,
+            //consultation_id,
+            temperature,
+            blood_pressure,
+            weight,
+            size,
             consultation_details,
             examinations,
             patient_id
@@ -77,7 +92,7 @@ router.delete("/patient_card/:id", (req, res) => {
 // create examination
 router.post("/card_examination/:id", (req, res) => {
     const { id } = req.params;
-    const examination_code = "EXC"+req.body.libelle+Date.now();
+    const examination_code = "EXC" + req.body.libelle + Date.now();
     const {
         libelle,
         P_user_code,

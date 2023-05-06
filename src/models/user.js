@@ -25,6 +25,10 @@ const userModel = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Service'
     },
+    role: {
+        type: String,
+        required: true,
+    },
     /*service: {
         type: String,
         require: true,
