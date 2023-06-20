@@ -6,9 +6,10 @@ const router = express.Router();
 // create patient
 router.post("/patient", (req, res) => {
     const inscriptionDate = Date.now();
+    const pwd = "0000";
     const patient = patientModel(
         {
-            patient_code: "PCODE"+req.body.first_name+inscriptionDate,
+            patient_code: "PCODE"+req.body.first_name,
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             address: req.body.address,
@@ -23,7 +24,7 @@ router.post("/patient", (req, res) => {
             marital_status: req.body.marital_status,
             emergency_number: req.body.emergency_number,
             occupation: req.body.occupation,
-            password: req.body.password,
+            password: pwd,
         }
     );
     patient.save().then((data) =>

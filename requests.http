@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://127.0.0.1:9000/api/patient_cards/644e98fe5e30334e3892db2d HTTP/1.1
+GET http://127.0.0.1:9000/api/users HTTP/1.1
 
 ###
 GET http://127.0.0.1:9000/api/consultations/644c451f7c80fc0a41a9f7bf HTTP/1.1

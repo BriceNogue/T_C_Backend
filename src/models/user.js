@@ -27,7 +27,7 @@ const userModel = new Schema({
     },
     role: {
         type: String,
-        required: true,
+        required: false,
     },
     /*service: {
         type: String,

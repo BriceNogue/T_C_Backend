@@ -101,8 +101,6 @@ router.delete("/user/:id", (req, res) => {
             res.json({ message: error }));
 });
 
-
-// login route
 router.get("/userSearch/:service", function (req, res) {
     const { service_id } = req.params;
     const options = {
@@ -119,6 +117,7 @@ router.get("/userSearch/:service", function (req, res) {
 
 })
 
+// login route
 router.post("/login", async (req, res) => {
 
     try {

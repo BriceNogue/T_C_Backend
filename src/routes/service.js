@@ -39,7 +39,7 @@ router.get("/services/:id", (req, res) => {
 });
 
 // update service
-router.put("/servie/:id", (req, res) => {
+router.put("/service/:id", (req, res) => {
     const { id } = req.params;
     const {
         service_code,
